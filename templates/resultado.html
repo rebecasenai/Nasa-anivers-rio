@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA - Sua Foto Especial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <div class="container resultado-container">
+    
+        <a href="/" class="back-button">
+            <span class="back-icon">←</span> Voltar
+        </a>
+        
+        {% if erro %}
+   
+        <div class="error-card">
+            <div class="error-icon">🌠</div>
+            <h2>Ops! Algo não saiu como esperado</h2>
+            <p>{{ erro }}</p>
+            <a href="/" class="btn-secondary">Tentar Novamente</a>
+        </div>
+        {% elif foto %}
+
+        <div class="result-card">
+
+            <div class="nasa-badge">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" 
+                     alt="NASA" 
+                     width="60">
+                <span>APOD - Astronomy Picture of the Day</span>
+            </div>
+            
+          
+            <h1 class="foto-titulo">{{ foto.titulo }}</h1>
+         
+            <div class="data-especial">
+                <span class="data-badge">
+                    📅 {{ foto.data }}
+                </span>
+            </div>
+            
+            <!-- Container da mídia -->
+            <div class="media-container">
+                {% if foto.tipo == 'video' %}
+                <!-- Vídeo -->
+                <div class="video-wrapper">
+                    <iframe src="{{ foto.url }}" 
+                            frameborder="0" 
+                            allowfullscreen
+                            title="Vídeo da NASA">
+                    </iframe>
+                </div>
+                {% else %}
+                <!-- Imagem -->
+                <div class="image-wrapper">
+                    <img src="{{ foto.url }}" 
+                         alt="{{ foto.titulo }}"
+                         class="foto-imagem"
+                         onerror="this.src='https://via.placeholder.com/800x600?text=Imagem+Indisponível'">
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Descrição -->
+            <div class="descricao-container">
+                <h3>Sobre esta imagem</h3>
+                <p class="foto-descricao">{{ foto.explicacao }}</p>
+            </div>
+            
+            <!-- Copyright e informações -->
+            <div class="foto-metadata">
+                {% if foto.copyright %}
+                <p class="copyright">© {{ foto.copyright }}</p>
+                {% endif %}
+                <p class="fonte">Fonte: NASA APOD</p>
+            </div>
+            
+            <!-- Compartilhar -->
+            <div class="share-section">
+                <h4>Compartilhe</h4>
+                <div class="share-buttons">
+                    <button onclick="copiarLink()" class="share-btn">copiar Link</button>
+                    <a href="https://twitter.com/intent/tweet?text=Veja%20a%20foto%20que%20a%20NASA%20tirou%20no%20dia%20do%20meu%20nascimento!%20{{ foto.titulo }}&url={{ request.url }}" 
+                       target="_blank" 
+                       class="share-btn">Twitter</a>
+                </div>
+            </div>
+            
+            <!--nova busca -->
+            <div class="nova-busca">
+                <a href="/" class="btn-primary">
+                    <span>Buscar Outra Data</span>
+                    <span class="btn-icon">🔭</span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- footer -->
+        <footer>
+            <p>✨ A magia do universo no dia do seu nascimento ✨</p>
+        </footer>
+    </div>
+
+    <script>
+        function copiarLink() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                alert('Link copiado para a área de transferência!');
+            }, function() {
+                alert('Não foi possível copiar o link.');
+            });
+        }
+        
+        // animação de entrada
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

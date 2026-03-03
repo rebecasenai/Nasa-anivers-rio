@@ -1,0 +1,659 @@
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0B0B2B;
+    --secondary-color: #1B1B4B;
+    --accent-color: #FFD700;
+    --accent-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+    --text-light: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --error-bg: rgba(255, 0, 0, 0.2);
+    --success-bg: rgba(0, 255, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Efeito de estrelas */
+.stars, .twinkling {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.stars {
+    background: #000 url('https://www.script-tutorials.com/demos/360/images/stars.png') repeat top center;
+    z-index: 0;
+}
+
+.twinkling {
+    background: transparent url('https://www.script-tutorials.com/demos/360/images/twinkling.png') repeat top center;
+    z-index: 1;
+    animation: move-twink-back 200s linear infinite;
+}
+
+@keyframes move-twink-back {
+    from {background-position: 0 0;}
+    to {background-position: -10000px 5000px;}
+}
+
+/* Container principal */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* estilos para as p√°ginas de erro */
+.error-container {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.error-container h1 {
+    font-size: 6rem;
+    margin-bottom: 0;
+    color: var(--accent-color);
+}
+
+.error-container h2 {
+    font-size: 2rem;
+    margin: 10px 0 20px;
+}
+
+.error-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* Logo NASA */
+.logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.nasa-logo {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+/*  com efeito glitch */
+.glitch {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-light);
+    position: relative;
+    margin-bottom: 20px;
+    animation: glitch 3s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    animation: glitch-effect 3s infinite;
+    color: #ff00ff;
+    z-index: -1;
+}
+
+.glitch::after {
+    animation: glitch-effect 2s infinite;
+    color: #00ffff;
+    z-index: -2;
+}
+
+@keyframes glitch-effect {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+}
+
+/* Subt√≠tulo */
+.subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    margin-bottom: 50px;
+    line-height: 1.6;
+}
+
+/* Cards de informa√ß√£o */
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.card p {
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+/* Se√ß√£o de busca */
+.search-section {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-section h2 {
+    margin-bottom: 30px;
+    color: var(--accent-color);
+    font-size: 2rem;
+}
+
+.birthday-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+input[type="date"] {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+input[type="date"]:hover {
+    transform: scale(1.02);
+}
+
+.btn-primary {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 15px;
+    background: var(--accent-gradient);
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+.form-note {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+
+.curiosities {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.curiosities h3 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.curiosity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.curiosity-item {
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.curiosity-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.curiosity-text {
+    color: var(--text-dim);
+}
+
+
+.resultado-container {
+    max-width: 900px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
+}
+
+.result-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nasa-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nasa-badge span {
+    color: var(--accent-color);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.foto-titulo {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.data-especial {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.data-badge {
+    background: var(--accent-gradient);
+    color: var(--primary-color);
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+
+.media-container {
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.image-wrapper, .video-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.foto-imagem {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.descricao-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.descricao-container h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.foto-descricao {
+    line-height: 1.8;
+    color: var(--text-dim);
+}
+
+.foto-metadata {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.copyright {
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.fonte {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.share-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.share-section h4 {
+    color: var(--text-dim);
+    margin-bottom: 15px;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: var(--text-light);
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.share-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+}
+
+.nova-busca {
+    text-align: center;
+}
+
+
+.error-card {
+    background: var(--error-bg);
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.error-card h2 {
+    color: #ff6b6b;
+    margin-bottom: 15px;
+}
+
+.error-card p {
+    margin-bottom: 25px;
+    color: var(--text-dim);
+}
+
+.btn-secondary {
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer p {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.credits {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+
+@media (max-width: 768px) {
+    .glitch {
+        font-size: 2rem;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .result-card {
+        padding: 20px;
+    }
+    
+    .foto-titulo {
+        font-size: 1.5rem;
+    }
+    
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Anima√ß√µes de entrada */
+.container {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+.loaded .container {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ---------- extras visuais ---------- */
+/* animaÁ„o pulse para p·ginas de erro */
+.error-container {
+    animation: pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.02); }
+}
+
+/* efeito de foco e seleÁ„o melhorado */
+::selection {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* botıes com sombra mais intensa e efeito neon */
+.btn-primary,
+.btn-secondary,
+.share-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after,
+.btn-secondary::after,
+.share-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.4s;
+}
+
+.btn-primary:hover::after,
+.btn-secondary:hover::after,
+.share-btn:hover::after {
+    left: 0;
+}
+
+/* scrollbar customizada leve */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+/* reforÁo nos containers com sombras sutis */
+.card,
+.search-section,
+.result-card,
+.error-card {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* efeitos extras para Ìcones e textos */
+.error-icon,
+.back-button,
+.share-btn,
+.btn-primary .btn-icon {
+    transition: transform 0.3s;
+}
+.error-icon:hover,
+.back-button:hover .back-icon,
+.share-btn:hover,
+.btn-primary:hover .btn-icon {
+    transform: scale(1.2);
+}
+
+/* foco nos inputs */
+input[type="date"]:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+

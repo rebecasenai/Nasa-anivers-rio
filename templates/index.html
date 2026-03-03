@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA - Explore o Universo do seu Nascimento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- efeito legal -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <div class="container intro-container">
+        <!-- logo da NASA -->
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg" 
+                 alt="NASA Logo" 
+                 class="nasa-logo"
+                 onerror="this.src='https://via.placeholder.com/200x200?text=NASA'">
+        </div>
+        
+        <!-- título principal -->
+        <h1 class="glitch" data-text="NASA: A Foto do Seu Nascimento">
+            NASA: A Foto do Seu Nascimento
+        </h1>
+        
+        <!-- subtítulo -->
+        <p class="subtitle">
+            Descubra qual imagem extraordinária o telescópio da NASA capturou<br>
+            no dia em que você veio ao mundo
+        </p>
+        
+        <!-- cards de informações -->
+        <div class="info-cards">
+            <div class="card">
+                <div class="card-icon">🌌</div>
+                <h3>APOD</h3>
+                <p>Astronomy Picture of the Day - A foto astronômica do dia desde 1995</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📅</div>
+                <h3>Data Especial</h3>
+                <p>Selecione sua data de nascimento e veja a imagem cósmica daquele dia</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🔭</div>
+                <h3>NASA</h3>
+                <p>Imagens reais capturadas pelos telescópios e sondas da NASA</p>
+            </div>
+        </div>
+        
+
+        <div class="search-section">
+            <h2>Quando você nasceu?</h2>
+            <form action="/buscar" method="POST" class="birthday-form" onsubmit="return validarData()">
+                <div class="input-group">
+                    <input type="date" 
+                           id="data_nascimento" 
+                           name="data_nascimento" 
+                           required
+                           min="1995-06-16"
+                           max="{{ datetime.now().strftime('%Y-%m-%d') if datetime else '' }}">
+                    <button type="submit" class="btn-primary">
+                        <span>Ver Minha Foto</span>
+                        <span class="btn-icon">🚀</span>
+                    </button>
+                </div>
+                <p class="form-note">* Disponível apenas para datas a partir de 16/06/1995</p>
+            </form>
+        </div>
+        
+        <!-- exibição de erro (se houver) -->
+        {% if erro %}
+        <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <p>{{ erro }}</p>
+        </div>
+        {% endif %}
+        
+        <!-- curiosidades -->
+        <div class="curiosities">
+            <h3>Sabia que...</h3>
+            <div class="curiosity-grid">
+                <div class="curiosity-item">
+                    <span class="curiosity-number">+10.000</span>
+                    <span class="curiosity-text">fotos publicadas desde 1995</span>
+                </div>
+                <div class="curiosity-item">
+                    <span class="curiosity-number">365</span>
+                    <span class="curiosity-text">dias por ano de imagens</span>
+                </div>
+                <div class="curiosity-item">
+                    <span class="curiosity-number">+1 Bilhão</span>
+                    <span class="curiosity-text">visualizações mundiais</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Site feito por Rebeca</p>
+            <p class="credits">Imagens cortesia da NASA APOD (Astronomy Picture of the Day)</p>
+        </footer>
+    </div>
+
+    <script>
+        function validarData() {
+            const data = document.getElementById('data_nascimento').value;
+            if (!data) {
+                alert('Por favor, selecione sua data de nascimento.');
+                return false;
+            }
+            
+            const dataSelecionada = new Date(data);
+            const dataInicio = new Date('1995-06-16');
+            const hoje = new Date();
+            
+            if (dataSelecionada < dataInicio) {
+                alert('O APOD da NASA começou em 16 de Junho de 1995. Por favor, escolha uma data posterior.');
+                return false;
+            }
+            
+            if (dataSelecionada > hoje) {
+                alert('Não é possível buscar fotos do futuro!');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // Animação de entrada
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
